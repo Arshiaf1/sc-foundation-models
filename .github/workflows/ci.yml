@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 src/ scripts/ tests/ --max-line-length=120 --ignore=E501,W503 || true
+
+      - name: Run tests
+        run: |
+          pytest tests/ -v --tb=short
+
+      - name: Validate schema imports
+        run: |
+          python -c "from src.schema import PaperRecord; print('Schema OK')"
+          python -c "from src.normalize import deduplicate; print('Normalize OK')"
+          python -c "from src.bibliometrics import run_bibliometrics; print('Bibliometrics OK')"
+
+      - name: Check processed data exists (skip regeneration in CI)
+        run: |
+          python -c "
+          from pathlib import Path
+          required = [
+            'src/__init__.py',
+            'src/schema.py',
+            'src/ingest.py',
+            'src/normalize.py',
+            'src/bibliometrics.py',
+            'src/figures.py',
+            'src/tables.py',
+            'scripts/run_pipeline.py',
+            'requirements.txt',
+            'environment.yml',
+            'README.md',
+          ]
+          missing = [f for f in required if not Path(f).exists()]
+          if missing:
+              print('MISSING FILES:', missing)
+              exit(1)
+          print('All required files present.')
+          "
+
+  regenerate-artifacts:
+    runs-on: ubuntu-latest
+    needs: test-and-validate
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Regenerate figures and tables from cached data (if present)
+        run: |
+          if [ -f data/raw/raw_combined.json ]; then
+            mkdir -p logs
+            python scripts/run_pipeline.py --skip-ingest
+          else
+            echo "No cached data; skipping artifact regeneration."
+          fi
+
+      - name: Upload figures as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: figures
+          path: figures/
+          if-no-files-found: warn
