@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software and dataset, please cite as below."
+type: software
+title: "Single-Cell Foundation Models in Biotechnology: Scoping Review and Bibliometric Analysis"
+abstract: >
+  Reproducible analysis package for a systematic scoping review and bibliometric
+  analysis of single-cell foundation models in biotechnology, covering multimodal
+  omics integration, perturbation prediction, and biomarker discovery.
+version: "1.0.0"
+date-released: "2026-04-23"
+repository-code: "https://github.com/[owner]/sc-foundation-models"
+license: MIT
+keywords:
+  - single-cell genomics
+  - foundation models
+  - transformer
+  - bibliometrics
+  - perturbation prediction
+  - biomarker discovery
+  - spatial transcriptomics
+  - reproducibility
