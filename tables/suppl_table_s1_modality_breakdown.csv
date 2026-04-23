@@ -1,0 +1,26 @@
+omics_modality,n_papers
+unspecified,401
+scRNA-seq,192
+"scRNA-seq, Spatial",154
+"scRNA-seq, Protein/CITE-seq",56
+Protein/CITE-seq,54
+"scRNA-seq, Protein/CITE-seq, Spatial",37
+Spatial,36
+scATAC-seq,21
+"scRNA-seq, scATAC-seq",14
+"Protein/CITE-seq, Spatial",12
+"scRNA-seq, Protein/CITE-seq, Spatial, Methylation/Epigenomics",8
+"scRNA-seq, Protein/CITE-seq, Methylation/Epigenomics",8
+"scRNA-seq, scATAC-seq, Spatial",8
+Methylation/Epigenomics,6
+"scRNA-seq, Methylation/Epigenomics",5
+"scRNA-seq, scATAC-seq, Methylation/Epigenomics",5
+"scRNA-seq, scATAC-seq, Protein/CITE-seq, Spatial",5
+"scRNA-seq, scATAC-seq, Protein/CITE-seq",5
+"Protein/CITE-seq, Methylation/Epigenomics",4
+"scATAC-seq, Spatial",3
+"scATAC-seq, Methylation/Epigenomics",3
+"scRNA-seq, Spatial, Methylation/Epigenomics",2
+"scRNA-seq, scATAC-seq, Protein/CITE-seq, Spatial, Methylation/Epigenomics",1
+"scATAC-seq, Protein/CITE-seq",1
+"scRNA-seq, scATAC-seq, Spatial, Methylation/Epigenomics",1
