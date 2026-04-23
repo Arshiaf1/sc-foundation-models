@@ -1,0 +1,10 @@
+model_family,count
+multimodal_fusion,306
+foundation_scale_pretraining,145
+spatial_omics,140
+hybrid_symbolic_statistical,117
+perturbation_prediction,97
+other_or_unclassified,81
+transformer_masked_lm,56
+graph_neural_network,52
+variational_autoencoder,48
