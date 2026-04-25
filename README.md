@@ -1,50 +1,27 @@
-# Single-Cell Foundation Models in Biotechnology: Scoping Review and Bibliometric Analysis
+# Single-Cell Foundation Models in Biotechnology: A Scoping Review and Bibliometric Analysis
 
-[![CI](https://github.com/[owner]/sc-foundation-models/actions/workflows/ci.yml/badge.svg)](https://github.com/[owner]/sc-foundation-models/actions/workflows/ci.yml)
+This repository holds the code, data, and outputs from my scoping review and bibliometric analysis of single-cell foundation models in biotechnology. I focused especially on multimodal AI approaches for things like cell-state prediction, perturbation modeling, and biomarker discovery.
 
-This repository contains the complete reproducible analysis package for:
-
-> **Single-Cell Foundation Models in Biotechnology: A Scoping Review and Bibliometric Analysis of Multimodal AI for Cell-State, Perturbation, and Biomarker Prediction**
+I put this together to make the whole analysis as reproducible as possible.
 
 ---
 
-## Contents
+## What's in the repo?
 
-```
 sc-foundation-models/
-  README.md              ← This file
-  LICENSE                ← MIT
-  CITATION.cff           ← Machine-readable citation
-  requirements.txt       ← Python dependencies (pip)
-  environment.yml        ← Conda environment
-  .gitignore
-  .github/workflows/ci.yml  ← CI: tests + artifact regeneration
-  data/
-    raw/                 ← Raw API responses (cached)
-    interim/             ← Excluded records, intermediate files
-    processed/           ← Normalized and scored paper dataset (CSV/Parquet)
-  figures/               ← All 6 manuscript figures (PNG)
-  tables/                ← All 4 manuscript tables + supplementary (CSV)
-  manuscript/            ← Manuscript source (manuscript.md)
-  scripts/
-    run_pipeline.py      ← Master pipeline: ingest → normalize → analyze → figures → tables
-  src/
-    schema.py            ← Pydantic schema for paper records
-    ingest.py            ← Literature search (PubMed, bioRxiv, Semantic Scholar, Crossref)
-    normalize.py         ← Normalization, deduplication, enrichment
-    bibliometrics.py     ← Bibliometric analysis, topic clustering, scoring
-    figures.py           ← All figure generation code
-    tables.py            ← All table generation code
-  tests/
-    test_schema.py
-    test_normalize.py
-    test_bibliometrics.py
-  supplementary/         ← Supplementary files
-  references/            ← BibTeX reference database
-  logs/                  ← Pipeline logs, query audit trail
-```
-
----
+├── README.md
+├── LICENSE
+├── CITATION.cff
+├── requirements.txt
+├── environment.yml
+├── scripts/run_pipeline.py          # main script to run everything
+├── src/                             # core code modules
+├── data/                            # raw, interim and processed data
+├── figures/                         # all the figures for the paper
+├── tables/                          # tables for the manuscript
+├── manuscript/manuscript.md
+├── tests/
+└── logs/
 
 ## Quick start
 
@@ -114,29 +91,23 @@ python src/figures.py --data data/processed/papers_scored.csv --biblio data/proc
 
 ## Methods summary
 
-- **Search date:** April 23, 2026
-- **Databases:** PubMed, bioRxiv, Semantic Scholar, Crossref
-- **Queries:** 8 structured queries (see `src/ingest.py::SEARCH_QUERIES`)
-- **Date filter:** 2020-01-01 to search date
-- **Raw records:** 1,295
-- **After deduplication:** 1,042
-- **Deduplication:** DOI exact match + fuzzy title similarity (RapidFuzz, threshold 88)
-- **Classification:** Keyword-rule taxonomy (model family, tasks, modalities)
-- **Topic modeling:** TF-IDF + K-means (k=8)
-- **Benchmark scoring:** 0–4 scale from abstract-level keyword presence
+- Search date: April 23, 2026
+- Databases: PubMed, bioRxiv, Semantic Scholar, and Crossref
+- Time period: papers from 2020 onwards
+- I used 8 different search queries
+- After cleaning and removing duplicates: around 1,042 unique records
+- Deduplication was done with exact DOI match + fuzzy title matching
+- Topic clustering with TF-IDF + K-means (I tried k=8 and it looked reasonable)
 
 ---
 
 ## Reproducibility notes
 
-All figures and tables are fully reproducible from source code and cached data. Random seeds are fixed (`random_state=42` in all scikit-learn calls). The pipeline is deterministic given the same input data.
+I fixed random seeds wherever possible so the results should be the same if you re-run it with the cached data. All API responses are saved locally, which makes it faster and more consistent to reproduce the figures and tables.
+A few limitations I noticed:
 
-API responses are cached locally. Re-running `--skip-ingest` regenerates all analysis outputs identically.
-
-**Known limitations:**
-- Abstract-level extraction underestimates code/data availability reporting rates
-- bioRxiv API returned limited results for some queries
-- Semantic Scholar was rate-limited for several queries
+Because a lot of the analysis is based on abstracts only, some things like code and data availability are probably under-reported.
+The bioRxiv and Semantic Scholar APIs had some limitations during the search.
 
 ---
 
@@ -154,4 +125,4 @@ See `CITATION.cff` for machine-readable citation.
 
 ## License
 
-MIT License — see `LICENSE`.
+MIT License — feel free to use and modify the code (see the LICENSE file).
