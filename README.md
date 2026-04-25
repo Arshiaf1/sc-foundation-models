@@ -114,6 +114,11 @@ The bioRxiv and Semantic Scholar APIs had some limitations during the search.
 
 ---
 
+> ### **Disclosure & Attribution**
+> This repository was developed with the assistance of generative AI tools for code structuring and technical implementation. The author provided the conceptual framework, defined the biological parameters, and performed full manual validation of all scripts. The final codebase represents the author's integration of AI-assisted development with human-led scientific oversight to ensure accuracy and reproducibility.
+
+---
+
 ## Citation
 
 If you use this dataset or code, please cite:
