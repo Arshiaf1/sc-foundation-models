@@ -8,18 +8,21 @@ I put this together to make the whole analysis as reproducible as possible.
 
 ## What's in the repo?
 
+```bash
 sc-foundation-models/
 ├── README.md
 ├── LICENSE
 ├── CITATION.cff
 ├── requirements.txt
 ├── environment.yml
-├── scripts/run_pipeline.py          # main script to run everything
-├── src/                             # core code modules
-├── data/                            # raw, interim and processed data
-├── figures/                         # all the figures for the paper
-├── tables/                          # tables for the manuscript
-├── manuscript/manuscript.md
+├── scripts/
+│   └── run_pipeline.py          # main script to run everything
+├── src/                         # core code modules
+├── data/                        # raw, interim and processed data
+├── figures/                     # all the figures for the paper
+├── tables/                      # tables for the manuscript
+├── manuscript/
+│   └── manuscript.md
 ├── tests/
 └── logs/
 
