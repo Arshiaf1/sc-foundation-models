@@ -21,8 +21,6 @@ sc-foundation-models/
 ├── data/                        # raw, interim and processed data
 ├── figures/                     # all the figures for the paper
 ├── tables/                      # tables for the manuscript
-├── manuscript/
-│   └── manuscript.md
 ├── tests/
 └── logs/
 
