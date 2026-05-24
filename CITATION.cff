@@ -8,7 +8,7 @@ abstract: >
   omics integration, perturbation prediction, and biomarker discovery.
 version: "1.0.0"
 date-released: "2026-04-23"
-repository-code: "https://github.com/[owner]/sc-foundation-models"
+repository-code: "https://github.com/Arshiaf1/sc-foundation-models"
 license: MIT
 keywords:
   - single-cell genomics
